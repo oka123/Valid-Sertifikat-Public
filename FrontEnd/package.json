@@ -1,0 +1,41 @@
+{
+  "name": "validsertifikat-app",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite",
+    "dev": "concurrently \"npm run tailwinddev\" \"npm run tailwinddev2\" \"vite\"",
+    "build": "npm run tailwindprod && npm run minify:html && vite build",
+    "preview": "vite preview",
+    "tailwinddev": "npx @tailwindcss/cli -i ./Generate/src/input.css -o ./Generate/src/minified.css --watch",
+    "tailwindprod": "npx @tailwindcss/cli -i ./Generate/src/input.css -o ./Generate/src/minified.css --minify",
+    "minify:html": "html-minifier --collapse-whitespace --remove-comments --minify-css --minify-js --minify-urls --remove-empty-attributes --remove-redundant-attributes --remove-tag-whitespace --remove-script-type-attributes --remove-style-link-type-attributes --keep-closing-slash  -o Generate/src/minified.html Generate/src/minified.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "fabric": "^5.3.0",
+    "jspdf": "^4.0.0",
+    "jsqr": "^1.4.0",
+    "jszip": "^3.10.1",
+    "papaparse": "^5.4.1",
+    "pdfjs-dist": "^5.4.530",
+    "qr-code-styling": "^1.9.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.39.2",
+    "globals": "^16.5.0",
+    "tailwindcss": "^4.1.17",
+    "terser": "^5.44.0",
+    "typescript-eslint": "^8.50.1",
+    "vite": "^7.2.1",
+    "vite-plugin-singlefile": "^2.3.0"
+  }
+}

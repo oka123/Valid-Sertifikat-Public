@@ -1,0 +1,276 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* All CSS from the original file is placed here, scoped to the component */
+
+:host {
+  @apply block h-full w-full;
+}
+/* Pola titik untuk background canvas area */
+.bg-dots {
+  background-image: radial-gradient(#a1a1aa 1px, transparent 0);
+  background-size: 20px 20px;
+}
+.dark .bg-dots {
+  background-image: radial-gradient(#475569 1px, transparent 0);
+}
+
+/* Custom scrollbar light mode */
+::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+::-webkit-scrollbar-track {
+  @apply bg-[#f1f5f9];
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-[#94a3b8] rounded-sm;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply hover:bg-[#64748b];
+}
+
+/* Custom scrollbar dark mode */
+.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Terapkan untuk SEMUA input dan textarea */
+input::placeholder,
+textarea::placeholder {
+  color: #a0aaae; /* Contoh warna abu-abu muda, disarankan untuk latar belakang terang */
+  opacity: 1;
+}
+
+/* Kompatibilitas Firefox */
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #a0a0a0;
+  opacity: 1;
+}
+
+/* Kompatibilitas Internet Explorer / Edge (lama) */
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #a0a0a0;
+}
+
+/* Kompatibilitas Microsoft Edge (baru) */
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+  color: #a0a0a0;
+}
+
+@layer base {
+  button {
+    @apply cursor-pointer;
+  }
+}
+.borders {
+  border-width: 1px;
+}
+
+.borders-r {
+  border-right-width: 1px;
+}
+
+.borders-b {
+  border-bottom-width: 1px;
+}
+
+.borders-l {
+  border-left-width: 1px;
+}
+
+.borders-t {
+  border-top-width: 1px;
+}
+
+/* Autocomplete Suggestions Style */
+.suggestion-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+.suggestion-item:hover,
+.suggestion-item.active {
+  background-color: #4f46e5;
+  color: white;
+}
+
+#context-menu {
+  --menu-bg: #1e293b; /* slate-800 */
+  --menu-text: #cbd5e1; /* slate-300 */
+  --menu-hover-bg: #334155; /* slate-700 */
+  --menu-separator: #475569; /* slate-600 */
+  --menu-shortcut-text: #94a3b8; /* slate-400 */
+}
+#context-menu button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 8px 12px;
+  background-color: transparent;
+  border: none;
+  color: var(--menu-text);
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+#context-menu button:hover {
+  background-color: var(--menu-hover-bg);
+}
+#context-menu button:disabled {
+  color: #475569; /* slate-600 */
+  cursor: not-allowed;
+  background-color: transparent;
+}
+#context-menu .shortcut {
+  color: var(--menu-shortcut-text);
+  font-size: 12px;
+  margin-left: 16px;
+}
+#context-menu .separator {
+  height: 1px;
+  background-color: var(--menu-separator);
+  margin: 4px 0;
+}
+/* Submenu styles */
+#context-menu .submenu-container {
+  position: relative;
+}
+#context-menu .submenu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: -5px;
+  min-width: 150px;
+  background-color: var(--menu-bg);
+  border-radius: 6px;
+  padding: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+#context-menu .submenu-container:hover .submenu {
+  display: block;
+}
+/* FIX: Submenu overflow */
+#context-menu .submenu-container.submenu-open-left .submenu {
+  left: auto;
+  right: 100%;
+}
+#context-menu .submenu-container.submenu-open-right .submenu {
+  left: 100%;
+  right: auto;
+}
+#context-menu .submenu-container.submenu-open-top .submenu {
+  top: auto;
+  bottom: 0;
+}
+/* Mobile menu styles */
+#context-menu .md\:hidden button {
+  padding: 10px;
+  color: var(--menu-text);
+}
+#context-menu .md\:hidden button svg {
+  width: 24px;
+  height: 24px;
+}
+/* Alert Notification */
+/* TAMBAHKAN BLOK CSS INI DI DALAM TAG <style> */
+
+/* Style untuk setiap notifikasi */
+.notification-toast {
+  position: relative; /* Diperlukan untuk ripple */
+  overflow: hidden; /* Diperlukan untuk ripple */
+  padding: 12px 16px;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  /* Gunakan animasi baru */
+  animation: notyf-fadeinup 0.3s ease-out forwards,
+    notyf-fadeoutdown 0.3s ease-in 3.7s forwards;
+  opacity: 0;
+}
+
+/* Warna untuk setiap tipe notifikasi */
+.notification-toast.success {
+  background-color: #22c55e; /* green-500 */
+}
+.notification-toast.warning {
+  background-color: #f97316; /* orange-500 */
+}
+.notification-toast.error {
+  background-color: #ef4444; /* red-500 */
+}
+
+/* Pastikan teks berada di atas ripple */
+.notification-toast > span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Efek Ripple (menggunakan pseudo-element ::after) */
+.notification-toast::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%; /* Buat lingkaran besar */
+  padding-top: 200%;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 1;
+  animation: notyf-ripple 0.5s ease-out forwards;
+  z-index: 0;
+}
+
+/* Warna untuk setiap tipe notifikasi */
+.notification-toast.success {
+  background-color: #22c55e;
+}
+.notification-toast.warning {
+  background-color: #f97316;
+}
+.notification-toast.error {
+  background-color: #ef4444;
+}
+
+/* TAMBAHKAN KEYFRAMES BARU INI */
+@keyframes notyf-fadeinup {
+  from {
+    opacity: 0;
+    transform: translateY(25%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes notyf-fadeoutdown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(25%);
+  }
+}
+@keyframes notyf-ripple {
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
